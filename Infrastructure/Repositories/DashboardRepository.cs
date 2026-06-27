@@ -57,7 +57,7 @@ namespace CODE81_Assessment.Infrastructure.Repositories
         #endregion
 
         #region Monthly activity
-        
+
         public async Task<IEnumerable<MonthlyActivityDto>> GetMonthlyActivityAsync(int months)
         {
             var from = DateTimeOffset.UtcNow.AddMonths(-months + 1);

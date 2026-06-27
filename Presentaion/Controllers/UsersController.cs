@@ -22,7 +22,7 @@ namespace CODE81_Assessment.Presentaion.Controllers
         public async Task<ActionResult<PaginatedResult<UserDto>>> GetAllPaginated(
             [FromQuery] int pageNumber = 1,
             [FromQuery] int pageSize = 10)
-        
+
             => Ok(await _userService.GetAllPaginatedAsync(pageNumber, pageSize));
 
         [HttpGet("{id}")]

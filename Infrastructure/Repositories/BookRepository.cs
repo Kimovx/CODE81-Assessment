@@ -81,17 +81,17 @@ namespace CODE81_Assessment.Infrastructure.Repositories
 
             if (!string.IsNullOrWhiteSpace(title))
             {
-                query = query.Where(b => b.Title.Contains(title));
+                query = query.Where(b => b.Title.ToLower().Contains(title.ToLower()));
             }
 
             if (!string.IsNullOrWhiteSpace(author))
             {
-                query = query.Where(b => b.Authors.Any(a => a.Name.Contains(author)));
+                query = query.Where(b => b.Authors.Any(a => a.Name.ToLower().Contains(author.ToLower())));
             }
 
             if (!string.IsNullOrWhiteSpace(category))
             {
-                query = query.Where(b => b.Categories.Any(c => c.Name.Contains(category)));
+                query = query.Where(b => b.Categories.Any(c => c.Name.ToLower().Contains(category.ToLower())));
             }
 
             var totalCount = await query.CountAsync();

@@ -3,11 +3,11 @@
     public class TopActiveMemberDto
     {
         public int MemberId { get; set; }
-       
+
         public required string FullName { get; set; }
-       
+
         public required string Email { get; set; }
-       
+
         public int BorrowCount { get; set; }
     }
 }

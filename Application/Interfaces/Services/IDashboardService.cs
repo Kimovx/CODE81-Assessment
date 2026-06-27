@@ -3,7 +3,7 @@
 namespace CODE81_Assessment.Application.Interfaces.Services
 {
     public interface IDashboardService
-    {  
+    {
         #region KPIs
         Task<DashboardKpisDto> GetKpisAsync();
         #endregion

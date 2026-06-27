@@ -21,7 +21,7 @@ namespace CODE81_Assessment.Application.Services
         #region Top Lists 
         public async Task<IEnumerable<TopBorrowedBookDto>> GetTopBorrowedBooksAsync(int top = 10)
             => await _dashboardRepository.GetTopBorrowedBooksAsync(top);
-       
+
         public async Task<IEnumerable<TopActiveMemberDto>> GetTopActiveMembersAsync(int top = 10)
             => await _dashboardRepository.GetTopActiveMembersAsync(top);
         #endregion
@@ -33,7 +33,7 @@ namespace CODE81_Assessment.Application.Services
 
         #region Recent Activity
         public async Task<IEnumerable<RecentTransactionDto>> GetRecentTransactionsAsync(int top = 10)
-           => await _dashboardRepository.GetRecentTransactionsAsync(top); 
+           => await _dashboardRepository.GetRecentTransactionsAsync(top);
         #endregion
     }
 }

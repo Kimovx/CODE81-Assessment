@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Storage;
-using CODE81_Assessment.Application.Interfaces;
+﻿using CODE81_Assessment.Application.Interfaces;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace CODE81_Assessment.Infrastructure
 {

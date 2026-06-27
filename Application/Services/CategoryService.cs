@@ -51,7 +51,7 @@ namespace CODE81_Assessment.Application.Services
 
                 if (!exists)
                     throw new EntityNotFoundException("Parent category not found");
-                
+
                 parentCategoryName = await _categoryRepository.GetCategoryNameAsync(dto.ParentCategoryId.Value);
             }
 
