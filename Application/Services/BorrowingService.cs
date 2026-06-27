@@ -78,7 +78,7 @@ namespace CODE81_Assessment.Application.Services
 
                 return await GetByIdAsync(entity.Id);
             }
-            
+
             // Handling Race Condition Case
             catch (DbUpdateConcurrencyException)
             {

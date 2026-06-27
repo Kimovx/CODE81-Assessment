@@ -21,5 +21,9 @@ namespace CODE81_Assessment.Application.Interfaces.Repositories
 
         Task<List<Category>> GetByIdsAsync(List<int> ids);
         #endregion
+
+        #region Other Opertations
+        public Task<string> GetCategoryNameAsync(int id);
+        #endregion
     }
 }

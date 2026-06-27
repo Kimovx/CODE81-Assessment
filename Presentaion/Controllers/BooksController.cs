@@ -33,8 +33,8 @@ namespace CODE81_Assessment.Presentaion.Controllers
         [HttpPost]
         public async Task<ActionResult<BookDto>> Create([FromForm] BookCreateDto dto)
         {
-            var id = await _bookService.CreateAsync(dto);
-            return CreatedAtAction(nameof(GetById), new { id }, null);
+            var book = await _bookService.CreateAsync(dto);
+            return CreatedAtAction(nameof(GetById), new { book.Id }, book);
         }
 
         [Authorize(Roles = "Admin,Librarian")]

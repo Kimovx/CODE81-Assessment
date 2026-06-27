@@ -53,7 +53,18 @@ namespace CODE81_Assessment.Infrastructure.Repositories
             => _context.Categories.Update(entity);
 
         public void Delete(Category entity)
-            => _context.Categories.Remove(entity);
+            => entity.DeletedAt = DateTimeOffset.UtcNow;
+        #endregion
+
+        #region Other Operations
+        public async Task<string> GetCategoryNameAsync(int id)
+        {
+            var category = await _context.Categories
+                .AsNoTracking()
+                .FirstOrDefaultAsync(c => c.Id == id);
+
+            return category?.Name ?? string.Empty;
+        }
         #endregion
     }
 }

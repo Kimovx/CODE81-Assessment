@@ -1,4 +1,6 @@
-﻿using CODE81_Assessment.Application.DTOs.User;
+﻿using CODE81_Assessment.Application.Common;
+using CODE81_Assessment.Application.DTOs.User;
+using CODE81_Assessment.Application.Exceptions;
 using CODE81_Assessment.Application.Interfaces.Services;
 using CODE81_Assessment.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
@@ -26,6 +28,37 @@ namespace CODE81_Assessment.Application.Services
             return result;
         }
 
+        public async Task<PaginatedResult<UserDto>> GetAllPaginatedAsync(int pageNumber, int pageSize)
+        {
+            if (pageNumber <= 0) pageNumber = 1;
+            if (pageSize <= 0) pageSize = 10;
+
+            var query = _userManager.Users;
+
+            var totalCount = query.Count();
+
+            var users = query
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            var result = new List<UserDto>();
+
+            foreach (var user in users)
+            {
+                var roles = await _userManager.GetRolesAsync(user);
+                result.Add(MapToUserDto(user, roles.FirstOrDefault()));
+            }
+
+            return new PaginatedResult<UserDto>
+            {
+                Items = result,
+                TotalCount = totalCount,
+                PageNumber = pageNumber,
+                PageSize = pageSize
+            };
+        }
+
         public async Task<UserDto?> GetByIdAsync(int id)
         {
             var user = await _userManager.FindByIdAsync(id.ToString());
@@ -44,7 +77,7 @@ namespace CODE81_Assessment.Application.Services
             var result = await _userManager.CreateAsync(user, dto.Password);
 
             if (!result.Succeeded)
-                throw new Exception(string.Join(", ", result.Errors.Select(e => e.Description)));
+                throw new UserCreationFailedException();
 
             await _userManager.AddToRoleAsync(user, role.Name!);
 
@@ -60,7 +93,7 @@ namespace CODE81_Assessment.Application.Services
             var result = await _userManager.UpdateAsync(user);
 
             if (!result.Succeeded)
-                throw new Exception("Failed to update user");
+                throw new UserUpdateFailedException();
 
             if (dto.RoleId.HasValue)
             {
@@ -80,13 +113,12 @@ namespace CODE81_Assessment.Application.Services
             var result = await _userManager.DeleteAsync(user);
 
             if (!result.Succeeded)
-                throw new Exception("Failed to delete user");
+                throw new UserDeletionFailedException();
         }
 
         #endregion
 
         #region Private Helpers
-
         private static UserDto MapToUserDto(AppUser user, string? role)
         {
             return new UserDto
@@ -124,7 +156,6 @@ namespace CODE81_Assessment.Application.Services
             return await _roleManager.FindByIdAsync(roleId.ToString())
                 ?? throw new Exception("Role not found");
         }
-
         #endregion
     }
 }

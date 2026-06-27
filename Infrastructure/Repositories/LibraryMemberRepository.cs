@@ -34,20 +34,15 @@ namespace CODE81_Assessment.Infrastructure.Repositories
 
             return (data, totalCount);
         }
+
         public async Task AddAsync(LibraryMember member)
-        {
-            await _context.LibraryMembers.AddAsync(member);
-        }
+            => await _context.LibraryMembers.AddAsync(member);
 
         public void Update(LibraryMember member)
-        {
-            _context.LibraryMembers.Update(member);
-        }
+            => _context.LibraryMembers.Update(member);
 
         public void Delete(LibraryMember member)
-        {
-            _context.LibraryMembers.Remove(member);
-        }
+            => member.DeletedAt = DateTimeOffset.UtcNow;
 
         #endregion
     }

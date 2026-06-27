@@ -42,19 +42,13 @@ namespace CODE81_Assessment.Infrastructure.Repositories
         }
 
         public async Task AddAsync(Publisher publisher)
-        {
-            await _context.Publishers.AddAsync(publisher);
-        }
+            => await _context.Publishers.AddAsync(publisher);
 
         public void Update(Publisher publisher)
-        {
-            _context.Publishers.Update(publisher);
-        }
+            => _context.Publishers.Update(publisher);
 
         public void Delete(Publisher publisher)
-        {
-            _context.Publishers.Remove(publisher);
-        }
+            => publisher.DeletedAt = DateTimeOffset.UtcNow;
 
         #endregion
     }

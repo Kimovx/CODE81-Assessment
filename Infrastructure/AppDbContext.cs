@@ -1,15 +1,31 @@
-﻿using CODE81_Assessment.Domain.Entities;
+﻿using CODE81_Assessment.Domain.Common;
+using CODE81_Assessment.Domain.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 
 namespace CODE81_Assessment.Infrastructure
 {
     public class AppDbContext(DbContextOptions options) : IdentityDbContext<AppUser, AppRole, int>(options)
     {
         #region Builder
-        protected async override void OnModelCreating(ModelBuilder builder)
+        protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            #region Soft Delete Global Filter
+            foreach (var entityType in builder.Model.GetEntityTypes())
+            {
+                if (typeof(BaseEntity).IsAssignableFrom(entityType.ClrType))
+                {
+                    var method = typeof(AppDbContext)
+                        .GetMethod(nameof(SetSoftDeleteFilter), BindingFlags.NonPublic | BindingFlags.Static)!
+                        .MakeGenericMethod(entityType.ClrType);
+
+                    method.Invoke(null, [builder]);
+                }
+            }
+            #endregion
 
             #region Default Delete
             foreach (var relationship in builder.Model.GetEntityTypes()
@@ -53,7 +69,7 @@ namespace CODE81_Assessment.Infrastructure
                 .HasForeignKey(bt => bt.ReturnedById);
             #endregion
 
-            #region Update App User Default Constrains
+            #region Update App User Default Constrains 
             builder.Entity<AppUser>().Property(u => u.UserName).IsRequired();
             #endregion
         }
@@ -68,6 +84,14 @@ namespace CODE81_Assessment.Infrastructure
         public DbSet<RefreshToken> RefreshTokens => Set<RefreshToken>();
         public DbSet<UserLoginLog> UserLoginLogs => Set<UserLoginLog>();
         public DbSet<BorrowingTransaction> BorrowingTransactions => Set<BorrowingTransaction>();
+        #endregion
+
+        #region Helpers
+        private static void SetSoftDeleteFilter<T>(ModelBuilder builder)
+        where T : BaseEntity
+        {
+            builder.Entity<T>().HasQueryFilter(e => !e.DeletedAt.HasValue);
+        }
         #endregion
     }
 }

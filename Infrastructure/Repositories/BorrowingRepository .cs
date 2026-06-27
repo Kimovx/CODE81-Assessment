@@ -42,27 +42,18 @@ namespace CODE81_Assessment.Infrastructure.Repositories
         }
 
         public async Task<bool> IsBookBorrowedAsync(int bookId)
-        {
-            return await _context.BorrowingTransactions
+            => await _context.BorrowingTransactions
                 .AnyAsync(x => x.BookId == bookId && x.Status == TransactionStatus.Active);
-        }
 
         public async Task<int> GetActiveBorrowCountForMember(int memberId)
-        {
-            return await _context.BorrowingTransactions
+            => await _context.BorrowingTransactions
                 .CountAsync(x => x.MemberId == memberId && x.Status == TransactionStatus.Active);
-        }
-
 
         public async Task AddAsync(BorrowingTransaction entity)
-        {
-            await _context.BorrowingTransactions.AddAsync(entity);
-        }
+            => await _context.BorrowingTransactions.AddAsync(entity);
 
         public void Update(BorrowingTransaction entity)
-        {
-            _context.BorrowingTransactions.Update(entity);
-        }
+            => _context.BorrowingTransactions.Update(entity);
         #endregion
     }
 }

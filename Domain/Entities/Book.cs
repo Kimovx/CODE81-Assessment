@@ -1,10 +1,11 @@
-﻿using CODE81_Assessment.Domain.Enums;
+﻿using CODE81_Assessment.Domain.Common;
+using CODE81_Assessment.Domain.Enums;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CODE81_Assessment.Domain.Entities
 {
-    public class Book
+    public class Book : BaseEntity
     {
         [Key]
         public int Id { get; set; }

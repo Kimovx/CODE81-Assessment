@@ -41,7 +41,7 @@ namespace CODE81_Assessment.Infrastructure.Repositories
             => _context.Authors.Update(entity);
 
         public void Delete(Author entity)
-            => _context.Authors.Remove(entity);
+            => entity.DeletedAt = DateTimeOffset.UtcNow;
 
         #endregion
     }

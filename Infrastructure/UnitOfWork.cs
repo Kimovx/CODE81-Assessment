@@ -1,10 +1,12 @@
-﻿using CODE81_Assessment.Application.Interfaces;
+﻿using Microsoft.EntityFrameworkCore.Storage;
+using CODE81_Assessment.Application.Interfaces;
 
 namespace CODE81_Assessment.Infrastructure
 {
     public class UnitOfWork(AppDbContext db) : IUnitOfWork
     {
         private readonly AppDbContext _db = db;
+        private IDbContextTransaction? _transaction;
 
         #region Save Changes
         public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
@@ -12,20 +14,35 @@ namespace CODE81_Assessment.Infrastructure
         #endregion
 
         #region Transactions Management
-        public Task BeginTransactionAsync()
+
+        public async Task BeginTransactionAsync()
         {
-            throw new NotImplementedException();
+            if (_transaction != null)
+                return;
+
+            _transaction = await _db.Database.BeginTransactionAsync();
         }
 
-        public Task CommitAsync()
+        public async Task CommitAsync()
         {
-            throw new NotImplementedException();
+            if (_transaction is null)
+                throw new InvalidOperationException("No active transaction");
+
+            await _transaction.CommitAsync();
+            await _transaction.DisposeAsync();
+            _transaction = null;
         }
 
-        public Task RollbackAsync()
+        public async Task RollbackAsync()
         {
-            throw new NotImplementedException();
+            if (_transaction is null)
+                throw new InvalidOperationException("No active transaction");
+
+            await _transaction.RollbackAsync();
+            await _transaction.DisposeAsync();
+            _transaction = null;
         }
+
         #endregion
     }
 }

@@ -1,4 +1,5 @@
-﻿using CODE81_Assessment.Application.DTOs.User;
+﻿using CODE81_Assessment.Application.Common;
+using CODE81_Assessment.Application.DTOs.User;
 using CODE81_Assessment.Application.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -13,10 +14,16 @@ namespace CODE81_Assessment.Presentaion.Controllers
         private readonly IUserService _userService = userService;
 
         #region CRUD
-
         [HttpGet]
         public async Task<IActionResult> GetAll()
         => Ok(await _userService.GetAllAsync());
+
+        [HttpGet("paginated")]
+        public async Task<ActionResult<PaginatedResult<UserDto>>> GetAllPaginated(
+            [FromQuery] int pageNumber = 1,
+            [FromQuery] int pageSize = 10)
+        
+            => Ok(await _userService.GetAllPaginatedAsync(pageNumber, pageSize));
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)

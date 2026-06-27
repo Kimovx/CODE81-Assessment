@@ -31,7 +31,7 @@ namespace CODE81_Assessment.Application.Services
 
             return new PaginatedResult<CategoryDto>
             {
-                Items = items.Select(MapToGetDto),
+                Items = items.Select(item => MapToGetDto(item)),
                 TotalCount = totalCount,
                 PageNumber = pageNumber,
                 PageSize = pageSize
@@ -40,6 +40,8 @@ namespace CODE81_Assessment.Application.Services
 
         public async Task<CategoryDto> CreateAsync(CategoryCreateDto dto)
         {
+            var parentCategoryName = string.Empty;
+
             if (dto.ParentCategoryId.HasValue)
             {
                 if (dto.ParentCategoryId <= 0)
@@ -49,14 +51,18 @@ namespace CODE81_Assessment.Application.Services
 
                 if (!exists)
                     throw new EntityNotFoundException("Parent category not found");
+                
+                parentCategoryName = await _categoryRepository.GetCategoryNameAsync(dto.ParentCategoryId.Value);
             }
 
             var entity = MapToEntity(dto);
 
+
             await _categoryRepository.AddAsync(entity);
             await _unitOfWork.SaveChangesAsync();
 
-            return MapToGetDto(entity);
+
+            return MapToGetDto(entity, parentCategoryName);
         }
 
         public async Task UpdateAsync(int id, CategoryUpdateDto dto)
@@ -97,13 +103,13 @@ namespace CODE81_Assessment.Application.Services
 
         #region Helpers
 
-        private static CategoryDto MapToGetDto(Category entity)
+        private static CategoryDto MapToGetDto(Category entity, string? parentCategoryName = null)
             => new()
             {
                 Id = entity.Id,
                 Name = entity.Name,
                 ParentCategoryId = entity.ParentCategoryId,
-                ParentCategoryName = entity.ParentCategory?.Name
+                ParentCategoryName = parentCategoryName
             };
 
         private static Category MapToEntity(CategoryCreateDto dto)

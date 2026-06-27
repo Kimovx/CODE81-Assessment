@@ -1,0 +1,3420 @@
+{
+  "info": {
+    "_postman_id": "885ad51f-0dfc-45fc-8289-e110017028c2",
+    "name": "CODE81 Assessment",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "29908686",
+    "_collection_link": "https://go.postman.co/collection/29908686-885ad51f-0dfc-45fc-8289-e110017028c2?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "Auth",
+          "item": [
+            {
+              "name": "Login",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "let response = pm.response.json();\r",
+                      "\r",
+                      "pm.collectionVariables.set(\"token\", response.accessToken);\r",
+                      "\r",
+                      "console.log(\"Token:\", pm.collectionVariables.get(\"token\"));"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"password\": \"Admin@123456\",\n  \"username\": \"admin\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/Auth",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Auth"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"username\": \"admin\",\n  \"password\": \"Admin@123456\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/Auth",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "Auth"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": ":status",
+                      "value": 200
+                    },
+                    {
+                      "key": "content-type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "date",
+                      "value": "Sat, 27 Jun 2026 02:49:55 GMT"
+                    },
+                    {
+                      "key": "server",
+                      "value": "Kestrel"
+                    },
+                    {
+                      "key": "set-cookie",
+                      "value": "rt=11e40cce-79a7-499e-9620-a79759a439bb.rXED4lMeCVSy0idPYK7hWj3XqvysChWRVYvwvYgWc9yDFST33oyHLHAInpfAzEuj%2BC5SuBLkidDwiVuWixYsmA%3D%3D; expires=Sat, 04 Jul 2026 02:49:55 GMT; path=/; secure; samesite=none; httponly"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"accessToken\": \"{{json_web_token}}\",\n    \"refreshToken\": null\n}"
+                }
+              ]
+            },
+            {
+              "name": "Refresh Token",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/Auth/refresh",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Auth",
+                    "refresh"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Ok",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/Auth/refresh",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "Auth",
+                        "refresh"
+                      ]
+                    }
+                  },
+                  "_postman_previewlanguage": "Text",
+                  "header": null,
+                  "cookie": [],
+                  "body": null
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Authors",
+          "item": [
+            {
+              "name": "Get All Paginated",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/Authors?pageNumber=1&pageSize=10",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Authors"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "10"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "text/plain"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/Authors?pageNumber=1&pageSize=10",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "Authors"
+                      ],
+                      "query": [
+                        {
+                          "key": "pageNumber",
+                          "value": "1"
+                        },
+                        {
+                          "key": "pageSize",
+                          "value": "10"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": ":status",
+                      "value": 200
+                    },
+                    {
+                      "key": "content-type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "date",
+                      "value": "Sat, 27 Jun 2026 02:48:42 GMT"
+                    },
+                    {
+                      "key": "server",
+                      "value": "Kestrel"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"items\": [\n        {\n            \"id\": 1,\n            \"name\": \"Robert C. Martin\"\n        },\n        {\n            \"id\": 2,\n            \"name\": \"Martin Fowler\"\n        },\n        {\n            \"id\": 3,\n            \"name\": \"Eric Evans\"\n        },\n        {\n            \"id\": 4,\n            \"name\": \"Jon Skeet\"\n        },\n        {\n            \"id\": 5,\n            \"name\": \"Andrew Hunt\"\n        }\n    ],\n    \"totalCount\": 5,\n    \"pageNumber\": 1,\n    \"pageSize\": 10\n}"
+                }
+              ]
+            },
+            {
+              "name": "Create",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/Authors",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Authors"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "text/plain"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"string\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/Authors",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "Authors"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": ":status",
+                      "value": 201
+                    },
+                    {
+                      "key": "content-type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "date",
+                      "value": "Sat, 27 Jun 2026 02:56:42 GMT"
+                    },
+                    {
+                      "key": "server",
+                      "value": "Kestrel"
+                    },
+                    {
+                      "key": "location",
+                      "value": "https://localhost:7222/api/Authors/1002"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"id\": 1002,\n    \"name\": \"string\"\n}"
+                }
+              ]
+            },
+            {
+              "name": "Get By ID",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/Authors/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Authors",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "5501"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "text/plain"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/Authors/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "Authors",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id",
+                          "value": "1002"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": ":status",
+                      "value": 200
+                    },
+                    {
+                      "key": "content-type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "date",
+                      "value": "Sat, 27 Jun 2026 03:54:29 GMT"
+                    },
+                    {
+                      "key": "server",
+                      "value": "Kestrel"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"id\": 1002,\n    \"name\": \"string\"\n}"
+                }
+              ]
+            },
+            {
+              "name": "Update By ID",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/Authors/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Authors",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "5501"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"New\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/Authors/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "Authors",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id",
+                          "value": "1002"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "name": "Delete By ID",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/Authors/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Authors",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "5501"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/Authors/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "Authors",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id",
+                          "value": "1002"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Books",
+          "item": [
+            {
+              "name": "Get All Paginated",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/Books?pageNumber=1&pageSize=10",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Books"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "10"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "text/plain"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/Books?pageNumber=1&pageSize=10",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "Books"
+                      ],
+                      "query": [
+                        {
+                          "key": "pageNumber",
+                          "value": "1"
+                        },
+                        {
+                          "key": "pageSize",
+                          "value": "10"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": ":status",
+                      "value": 200
+                    },
+                    {
+                      "key": "content-type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "date",
+                      "value": "Sat, 27 Jun 2026 02:47:11 GMT"
+                    },
+                    {
+                      "key": "server",
+                      "value": "Kestrel"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"items\": [\n        {\n            \"id\": 5,\n            \"title\": \"The Pragmatic Programmer\",\n            \"isbn\": \"5555555555555\",\n            \"publicationYear\": 1999,\n            \"language\": \"English\",\n            \"edition\": \"1st\",\n            \"summary\": \"Career tips\",\n            \"status\": 1,\n            \"coverImageUrl\": null,\n            \"publisherName\": \"No Starch Press\",\n            \"authors\": [],\n            \"categories\": []\n        },\n        {\n            \"id\": 4,\n            \"title\": \"C# in Depth\",\n            \"isbn\": \"4444444444444\",\n            \"publicationYear\": 2019,\n            \"language\": \"English\",\n            \"edition\": \"4th\",\n            \"summary\": \"Advanced C#\",\n            \"status\": 0,\n            \"coverImageUrl\": null,\n            \"publisherName\": \"OReilly\",\n            \"authors\": [],\n            \"categories\": []\n        },\n        {\n            \"id\": 3,\n            \"title\": \"Domain-Driven Design\",\n            \"isbn\": \"3333333333333\",\n            \"publicationYear\": 2003,\n            \"language\": \"English\",\n            \"edition\": \"1st\",\n            \"summary\": \"DDD concepts\",\n            \"status\": 1,\n            \"coverImageUrl\": null,\n            \"publisherName\": \"New\",\n            \"authors\": [],\n            \"categories\": []\n        },\n        {\n            \"id\": 2,\n            \"title\": \"Refactoring\",\n            \"isbn\": \"2222222222222\",\n            \"publicationYear\": 2018,\n            \"language\": \"English\",\n            \"edition\": \"2nd\",\n            \"summary\": \"Improve code\",\n            \"status\": 0,\n            \"coverImageUrl\": null,\n            \"publisherName\": \"New\",\n            \"authors\": [],\n            \"categories\": []\n        },\n        {\n            \"id\": 1,\n            \"title\": \"Clean Code\",\n            \"isbn\": \"1111111111111\",\n            \"publicationYear\": 2008,\n            \"language\": \"English\",\n            \"edition\": \"1st\",\n            \"summary\": \"Best practices\",\n            \"status\": 0,\n            \"coverImageUrl\": null,\n            \"publisherName\": \"OReilly\",\n            \"authors\": [],\n            \"categories\": []\n        }\n    ],\n    \"totalCount\": 5,\n    \"pageNumber\": 1,\n    \"pageSize\": 10\n}"
+                }
+              ]
+            },
+            {
+              "name": "Create",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "multipart/form-data"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": [
+                    {
+                      "key": "Edition",
+                      "value": "string",
+                      "type": "text"
+                    },
+                    {
+                      "key": "ISBN",
+                      "value": "string",
+                      "type": "text"
+                    },
+                    {
+                      "key": "Language",
+                      "value": "string",
+                      "type": "text"
+                    },
+                    {
+                      "key": "Summary",
+                      "value": "string",
+                      "type": "text"
+                    },
+                    {
+                      "key": "Title",
+                      "value": "string",
+                      "type": "text"
+                    },
+                    {
+                      "key": "PublicationYear",
+                      "value": "447",
+                      "type": "text"
+                    },
+                    {
+                      "key": "PublisherId",
+                      "value": "8200",
+                      "type": "text"
+                    },
+                    {
+                      "key": "CoverImage",
+                      "type": "file",
+                      "value": null
+                    },
+                    {
+                      "key": "AuthorIds",
+                      "value": "6573,477",
+                      "type": "text"
+                    },
+                    {
+                      "key": "CategoryIds",
+                      "value": "5885,7633",
+                      "type": "text"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/Books",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Books"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "multipart/form-data"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "text/plain"
+                      }
+                    ],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": [
+                        {
+                          "key": "Edition",
+                          "value": "string",
+                          "type": "text"
+                        },
+                        {
+                          "key": "ISBN",
+                          "value": "string",
+                          "type": "text"
+                        },
+                        {
+                          "key": "Language",
+                          "value": "string",
+                          "type": "text"
+                        },
+                        {
+                          "key": "Summary",
+                          "value": "string",
+                          "type": "text"
+                        },
+                        {
+                          "key": "Title",
+                          "value": "string",
+                          "type": "text"
+                        },
+                        {
+                          "key": "PublicationYear",
+                          "value": "2006",
+                          "type": "text"
+                        },
+                        {
+                          "key": "PublisherId",
+                          "value": "1",
+                          "type": "text"
+                        },
+                        {
+                          "key": "CoverImage",
+                          "type": "file",
+                          "src": "postman-cloud:///1f171d29-9766-44e0-81ad-e2d4467268f2"
+                        },
+                        {
+                          "key": "AuthorIds",
+                          "value": "1",
+                          "type": "text"
+                        },
+                        {
+                          "key": "CategoryIds",
+                          "value": "4",
+                          "type": "text"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/Books",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "Books"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": ":status",
+                      "value": 201
+                    },
+                    {
+                      "key": "content-type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "date",
+                      "value": "Sat, 27 Jun 2026 02:54:37 GMT"
+                    },
+                    {
+                      "key": "server",
+                      "value": "Kestrel"
+                    },
+                    {
+                      "key": "location",
+                      "value": "https://localhost:7222/api/Books/1005"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"id\": 1005,\n    \"title\": \"string\",\n    \"isbn\": \"string\",\n    \"publicationYear\": 2006,\n    \"language\": \"string\",\n    \"edition\": \"string\",\n    \"summary\": \"string\",\n    \"status\": 0,\n    \"coverImageUrl\": null,\n    \"publisherName\": \"OReilly\",\n    \"authors\": [\n        \"Robert C. Martin\"\n    ],\n    \"categories\": [\n        \"Design Patterns\"\n    ]\n}"
+                }
+              ]
+            },
+            {
+              "name": "Get By ID",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/Books/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Books",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "5501"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "text/plain"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/Books/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "Books",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id",
+                          "value": "1005"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": ":status",
+                      "value": 200
+                    },
+                    {
+                      "key": "content-type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "date",
+                      "value": "Sat, 27 Jun 2026 02:55:13 GMT"
+                    },
+                    {
+                      "key": "server",
+                      "value": "Kestrel"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"id\": 1005,\n    \"title\": \"string\",\n    \"isbn\": \"string\",\n    \"publicationYear\": 2006,\n    \"language\": \"string\",\n    \"edition\": \"string\",\n    \"summary\": \"string\",\n    \"status\": 0,\n    \"coverImageUrl\": null,\n    \"publisherName\": \"OReilly\",\n    \"authors\": [\n        \"Robert C. Martin\"\n    ],\n    \"categories\": [\n        \"Design Patterns\"\n    ]\n}"
+                }
+              ]
+            },
+            {
+              "name": "Update By ID",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"string\",\n  \"isbn\": \"string\",\n  \"publicationYear\": 6471,\n  \"language\": \"string\",\n  \"edition\": \"string\",\n  \"summary\": \"string\",\n  \"status\": 0,\n  \"coverImageUrl\": \"string\",\n  \"publisherId\": 7070,\n  \"authorIds\": [\n    4355,\n    4835\n  ],\n  \"categoryIds\": [\n    1870,\n    1930\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/Books/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Books",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "5501"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"title\": \"string\",\n  \"isbn\": \"string\",\n  \"publicationYear\": 2025,\n  \"language\": \"string\",\n  \"edition\": \"string\",\n  \"summary\": \"string\",\n  \"status\": 0,\n  \"coverImageUrl\": \"string\",\n  \"publisherId\": 1,\n  \"authorIds\": [\n    3, \n    4\n  ],\n  \"categoryIds\": [\n    1,\n    2\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/Books/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "Books",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id",
+                          "value": "1005"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "name": "Delete By ID",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/Books/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Books",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "5501"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/Books/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "Books",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id",
+                          "value": "1005"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "name": "Search",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/Books/search?Title=string&Author=string&Category=string&PageNumber=5501&PageSize=5501",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Books",
+                    "search"
+                  ],
+                  "query": [
+                    {
+                      "key": "Title",
+                      "value": "string"
+                    },
+                    {
+                      "key": "Author",
+                      "value": "string"
+                    },
+                    {
+                      "key": "Category",
+                      "value": "string"
+                    },
+                    {
+                      "key": "PageNumber",
+                      "value": "5501"
+                    },
+                    {
+                      "key": "PageSize",
+                      "value": "5501"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "text/plain"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/Books/search?Title=Clean&Author=&Category=&PageNumber=1&PageSize=20",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "Books",
+                        "search"
+                      ],
+                      "query": [
+                        {
+                          "key": "Title",
+                          "value": "Clean"
+                        },
+                        {
+                          "key": "Author",
+                          "value": ""
+                        },
+                        {
+                          "key": "Category",
+                          "value": ""
+                        },
+                        {
+                          "key": "PageNumber",
+                          "value": "1"
+                        },
+                        {
+                          "key": "PageSize",
+                          "value": "20"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": ":status",
+                      "value": 200
+                    },
+                    {
+                      "key": "content-type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "date",
+                      "value": "Sat, 27 Jun 2026 03:53:09 GMT"
+                    },
+                    {
+                      "key": "server",
+                      "value": "Kestrel"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"items\": [\n        {\n            \"id\": 1,\n            \"title\": \"Clean Code\",\n            \"isbn\": \"1111111111111\",\n            \"publicationYear\": 2008,\n            \"language\": \"English\",\n            \"edition\": \"1st\",\n            \"summary\": \"Best practices\",\n            \"status\": 0,\n            \"coverImageUrl\": null,\n            \"publisherName\": \"OReilly\",\n            \"authors\": [],\n            \"categories\": []\n        }\n    ],\n    \"totalCount\": 1,\n    \"pageNumber\": 1,\n    \"pageSize\": 20\n}"
+                }
+              ]
+            },
+            {
+              "name": "Get Details By Status",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/Books/by-status?Status=0&PageNumber=5501&PageSize=5501",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Books",
+                    "by-status"
+                  ],
+                  "query": [
+                    {
+                      "key": "Status",
+                      "value": "0"
+                    },
+                    {
+                      "key": "PageNumber",
+                      "value": "5501"
+                    },
+                    {
+                      "key": "PageSize",
+                      "value": "5501"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "text/plain"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/Books/by-status?Status=0&PageNumber=1&PageSize=20",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "Books",
+                        "by-status"
+                      ],
+                      "query": [
+                        {
+                          "key": "Status",
+                          "value": "0"
+                        },
+                        {
+                          "key": "PageNumber",
+                          "value": "1"
+                        },
+                        {
+                          "key": "PageSize",
+                          "value": "20"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": ":status",
+                      "value": 200
+                    },
+                    {
+                      "key": "content-type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "date",
+                      "value": "Sat, 27 Jun 2026 03:53:26 GMT"
+                    },
+                    {
+                      "key": "server",
+                      "value": "Kestrel"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"items\": [\n        {\n            \"id\": 1005,\n            \"title\": \"string\",\n            \"isbn\": \"string\",\n            \"publicationYear\": 2025,\n            \"language\": \"string\",\n            \"edition\": \"string\",\n            \"summary\": \"string\",\n            \"status\": \"Available\",\n            \"coverImageUrl\": \"string\",\n            \"publisherName\": \"OReilly\",\n            \"authors\": [\n                \"Eric Evans\",\n                \"Jon Skeet\"\n            ],\n            \"categories\": [\n                \"Programming\",\n                \"Databases\"\n            ]\n        },\n        {\n            \"id\": 1004,\n            \"title\": \"string\",\n            \"isbn\": \"string\",\n            \"publicationYear\": 2006,\n            \"language\": \"string\",\n            \"edition\": \"string\",\n            \"summary\": \"string\",\n            \"status\": \"Available\",\n            \"coverImageUrl\": \"/books/7749a894-17f3-43a7-8a92-cc4b17db9e53.png\",\n            \"publisherName\": \"OReilly\",\n            \"authors\": [\n                \"Robert C. Martin\"\n            ],\n            \"categories\": [\n                \"Design Patterns\"\n            ]\n        },\n        {\n            \"id\": 1003,\n            \"title\": \"string\",\n            \"isbn\": \"string\",\n            \"publicationYear\": 2006,\n            \"language\": \"string\",\n            \"edition\": \"string\",\n            \"summary\": \"string\",\n            \"status\": \"Available\",\n            \"coverImageUrl\": \"/books/a577da1a-a7be-44f8-9970-0c62b9fdd493.png\",\n            \"publisherName\": \"OReilly\",\n            \"authors\": [\n                \"Robert C. Martin\"\n            ],\n            \"categories\": [\n                \"Design Patterns\"\n            ]\n        },\n        {\n            \"id\": 1002,\n            \"title\": \"string\",\n            \"isbn\": \"string\",\n            \"publicationYear\": 2006,\n            \"language\": \"string\",\n            \"edition\": \"string\",\n            \"summary\": \"string\",\n            \"status\": \"Available\",\n            \"coverImageUrl\": \"/books/ecafa77b-b047-4277-aba3-45eea9ccabb5.png\",\n            \"publisherName\": \"OReilly\",\n            \"authors\": [\n                \"Robert C. Martin\"\n            ],\n            \"categories\": [\n                \"Design Patterns\"\n            ]\n        },\n        {\n            \"id\": 4,\n            \"title\": \"C# in Depth\",\n            \"isbn\": \"4444444444444\",\n            \"publicationYear\": 2019,\n            \"language\": \"English\",\n            \"edition\": \"4th\",\n            \"summary\": \"Advanced C#\",\n            \"status\": \"Available\",\n            \"coverImageUrl\": null,\n            \"publisherName\": \"OReilly\",\n            \"authors\": [],\n            \"categories\": []\n        },\n        {\n            \"id\": 2,\n            \"title\": \"Refactoring\",\n            \"isbn\": \"2222222222222\",\n            \"publicationYear\": 2018,\n            \"language\": \"English\",\n            \"edition\": \"2nd\",\n            \"summary\": \"Improve code\",\n            \"status\": \"Available\",\n            \"coverImageUrl\": null,\n            \"publisherName\": \"New\",\n            \"authors\": [\n                \"Martin Fowler\"\n            ],\n            \"categories\": []\n        },\n        {\n            \"id\": 1,\n            \"title\": \"Clean Code\",\n            \"isbn\": \"1111111111111\",\n            \"publicationYear\": 2008,\n            \"language\": \"English\",\n            \"edition\": \"1st\",\n            \"summary\": \"Best practices\",\n            \"status\": \"Available\",\n            \"coverImageUrl\": null,\n            \"publisherName\": \"OReilly\",\n            \"authors\": [\n                \"Robert C. Martin\"\n            ],\n            \"categories\": [\n                \"Software Engineering\"\n            ]\n        }\n    ],\n    \"totalCount\": 7,\n    \"pageNumber\": 1,\n    \"pageSize\": 20\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Borrowing",
+          "item": [
+            {
+              "name": "Get All Paginated",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/Borrowing?page=1&size=10",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Borrowing"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "size",
+                      "value": "10"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "text/plain"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/Borrowing?page=1&size=10",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "Borrowing"
+                      ],
+                      "query": [
+                        {
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "key": "size",
+                          "value": "10"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": ":status",
+                      "value": 200
+                    },
+                    {
+                      "key": "content-type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "date",
+                      "value": "Sat, 27 Jun 2026 02:46:47 GMT"
+                    },
+                    {
+                      "key": "server",
+                      "value": "Kestrel"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"items\": [\n        {\n            \"id\": 3,\n            \"memberId\": 3,\n            \"memberName\": \"Ahmed Ali\",\n            \"bookId\": 1,\n            \"bookTitle\": \"Clean Code\",\n            \"borrowDate\": \"2026-06-27T04:13:30.3066667+00:00\",\n            \"dueDate\": \"2026-07-04T04:13:30.3066667\",\n            \"returnDate\": null,\n            \"status\": 0,\n            \"notes\": \"Active borrow\"\n        },\n        {\n            \"id\": 4,\n            \"memberId\": 4,\n            \"memberName\": \"Sara Mohamed\",\n            \"bookId\": 2,\n            \"bookTitle\": \"Refactoring\",\n            \"borrowDate\": \"2026-06-27T04:13:30.3066667+00:00\",\n            \"dueDate\": \"2026-07-04T04:13:30.3066667\",\n            \"returnDate\": \"2026-06-27T04:13:30.3066667+00:00\",\n            \"status\": 1,\n            \"notes\": \"Returned\"\n        },\n        {\n            \"id\": 1002,\n            \"memberId\": 3,\n            \"memberName\": \"Ahmed Ali\",\n            \"bookId\": 5,\n            \"bookTitle\": \"The Pragmatic Programmer\",\n            \"borrowDate\": \"2026-06-27T02:45:12.986171+00:00\",\n            \"dueDate\": \"1972-09-06T13:06:15.532\",\n            \"returnDate\": \"2026-06-27T02:45:41.9540197+00:00\",\n            \"status\": 1,\n            \"notes\": \"Test Notes\"\n        }\n    ],\n    \"totalCount\": 3,\n    \"pageNumber\": 1,\n    \"pageSize\": 10\n}"
+                }
+              ]
+            },
+            {
+              "name": "Get By ID",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/Borrowing/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Borrowing",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "5501"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "text/plain"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/Borrowing/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "Borrowing",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id",
+                          "value": "3"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": ":status",
+                      "value": 200
+                    },
+                    {
+                      "key": "content-type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "date",
+                      "value": "Sat, 27 Jun 2026 02:41:22 GMT"
+                    },
+                    {
+                      "key": "server",
+                      "value": "Kestrel"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"id\": 3,\n    \"memberId\": 3,\n    \"memberName\": \"Ahmed Ali\",\n    \"bookId\": 1,\n    \"bookTitle\": \"Clean Code\",\n    \"borrowDate\": \"2026-06-27T04:13:30.3066667+00:00\",\n    \"dueDate\": \"2026-07-04T04:13:30.3066667\",\n    \"returnDate\": null,\n    \"status\": 0,\n    \"notes\": \"Active borrow\"\n}"
+                }
+              ]
+            },
+            {
+              "name": "Return Transaction",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transactionId\": 5009,\n  \"notes\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/Borrowing/return",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Borrowing",
+                    "return"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"transactionId\": 1002,\n  \"notes\": \"string\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/Borrowing/return",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "Borrowing",
+                        "return"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "name": "Borrow Transaction",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"bookId\": 8394,\n  \"dueDate\": \"1972-09-06T13:06:15.532Z\",\n  \"memberId\": 9100,\n  \"notes\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/Borrowing/borrow",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Borrowing",
+                    "borrow"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"bookId\": 5,\n  \"dueDate\": \"1972-09-06T13:06:15.532Z\",\n  \"memberId\": 3,\n  \"notes\": \"Test Notes\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/Borrowing/borrow",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "Borrowing",
+                        "borrow"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": ":status",
+                      "value": 200
+                    },
+                    {
+                      "key": "content-type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "date",
+                      "value": "Sat, 27 Jun 2026 02:45:13 GMT"
+                    },
+                    {
+                      "key": "server",
+                      "value": "Kestrel"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"id\": 1002,\n    \"memberId\": 3,\n    \"memberName\": \"Ahmed Ali\",\n    \"bookId\": 5,\n    \"bookTitle\": \"The Pragmatic Programmer\",\n    \"borrowDate\": \"2026-06-27T02:45:12.986171+00:00\",\n    \"dueDate\": \"1972-09-06T13:06:15.532\",\n    \"returnDate\": null,\n    \"status\": 0,\n    \"notes\": \"Test Notes\"\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Categories",
+          "item": [
+            {
+              "name": "Get All Paginated",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/Categories?pageNumber=1&pageSize=10",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Categories"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "10"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "text/plain"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/Categories?pageNumber=1&pageSize=10",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "Categories"
+                      ],
+                      "query": [
+                        {
+                          "key": "pageNumber",
+                          "value": "1"
+                        },
+                        {
+                          "key": "pageSize",
+                          "value": "10"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": ":status",
+                      "value": 200
+                    },
+                    {
+                      "key": "content-type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "date",
+                      "value": "Sat, 27 Jun 2026 02:28:41 GMT"
+                    },
+                    {
+                      "key": "server",
+                      "value": "Kestrel"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"items\": [\n        {\n            \"id\": 4,\n            \"name\": \"Design Patterns\",\n            \"parentCategoryId\": 3,\n            \"parentCategoryName\": \"Software Engineering\"\n        },\n        {\n            \"id\": 3,\n            \"name\": \"Software Engineering\",\n            \"parentCategoryId\": 1,\n            \"parentCategoryName\": \"Programming\"\n        },\n        {\n            \"id\": 2,\n            \"name\": \"Databases\",\n            \"parentCategoryId\": 1,\n            \"parentCategoryName\": \"Programming\"\n        },\n        {\n            \"id\": 1,\n            \"name\": \"Programming\",\n            \"parentCategoryId\": null,\n            \"parentCategoryName\": null\n        }\n    ],\n    \"totalCount\": 4,\n    \"pageNumber\": 1,\n    \"pageSize\": 10\n}"
+                }
+              ]
+            },
+            {
+              "name": "Create",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"string\",\n  \"parentCategoryId\": 9776\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/Categories",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Categories"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "text/plain"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"Test\",\n  \"parentCategoryId\": 4\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/Categories",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "Categories"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": ":status",
+                      "value": 201
+                    },
+                    {
+                      "key": "content-type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "date",
+                      "value": "Sat, 27 Jun 2026 02:39:44 GMT"
+                    },
+                    {
+                      "key": "server",
+                      "value": "Kestrel"
+                    },
+                    {
+                      "key": "location",
+                      "value": "https://localhost:7222/api/Categories/2003"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"id\": 2003,\n    \"name\": \"Test\",\n    \"parentCategoryId\": 4,\n    \"parentCategoryName\": \"Design Patterns\"\n}"
+                }
+              ]
+            },
+            {
+              "name": "Get By ID",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/Categories/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Categories",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "5501"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "text/plain"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/Categories/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "Categories",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id",
+                          "value": "2003"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": ":status",
+                      "value": 200
+                    },
+                    {
+                      "key": "content-type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "date",
+                      "value": "Sat, 27 Jun 2026 02:40:04 GMT"
+                    },
+                    {
+                      "key": "server",
+                      "value": "Kestrel"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"id\": 2003,\n    \"name\": \"Test\",\n    \"parentCategoryId\": 4,\n    \"parentCategoryName\": null\n}"
+                }
+              ]
+            },
+            {
+              "name": "Update By ID",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"string\",\n  \"parentCategoryId\": 4800\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/Categories/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Categories",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "5501"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"string\",\n  \"parentCategoryId\": 4800\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/Categories/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "Categories",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id",
+                          "value": "2003"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "name": "Delete By ID",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/Categories/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Categories",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "5501"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/Categories/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "Categories",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id",
+                          "value": "2003"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "LibraryMembers",
+          "item": [
+            {
+              "name": "Get All Paginated",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/LibraryMembers?pageNumber=1&pageSize=10",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "LibraryMembers"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "10"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "text/plain"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/LibraryMembers?pageNumber=1&pageSize=10",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "LibraryMembers"
+                      ],
+                      "query": [
+                        {
+                          "key": "pageNumber",
+                          "value": "1"
+                        },
+                        {
+                          "key": "pageSize",
+                          "value": "10"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": ":status",
+                      "value": 200
+                    },
+                    {
+                      "key": "content-type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "date",
+                      "value": "Sat, 27 Jun 2026 02:26:57 GMT"
+                    },
+                    {
+                      "key": "server",
+                      "value": "Kestrel"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"items\": [\n        {\n            \"id\": 3,\n            \"fullName\": \"Ahmed Ali\",\n            \"email\": \"ahmed@test.com\",\n            \"phone\": \"0100000000\",\n            \"address\": \"Cairo\",\n            \"membershipStartDate\": \"2026-06-27T01:12:08.6866667+00:00\",\n            \"membershipEndDate\": null,\n            \"status\": 0\n        },\n        {\n            \"id\": 4,\n            \"fullName\": \"Sara Mohamed\",\n            \"email\": \"sara@test.com\",\n            \"phone\": \"0111111111\",\n            \"address\": \"Giza\",\n            \"membershipStartDate\": \"2026-06-27T01:12:08.6866667+00:00\",\n            \"membershipEndDate\": null,\n            \"status\": 0\n        }\n    ],\n    \"totalCount\": 2,\n    \"pageNumber\": 1,\n    \"pageSize\": 10\n}"
+                }
+              ]
+            },
+            {
+              "name": "Create",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"string\",\n  \"fullName\": \"string\",\n  \"phone\": \"string\",\n  \"address\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/LibraryMembers",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "LibraryMembers"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "text/plain"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"email\": \"example@domain.com\",\n  \"fullName\": \"string\",\n  \"phone\": \"string\",\n  \"address\": \"string\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/LibraryMembers",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "LibraryMembers"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": ":status",
+                      "value": 201
+                    },
+                    {
+                      "key": "content-type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "date",
+                      "value": "Sat, 27 Jun 2026 02:27:25 GMT"
+                    },
+                    {
+                      "key": "server",
+                      "value": "Kestrel"
+                    },
+                    {
+                      "key": "location",
+                      "value": "https://localhost:7222/api/LibraryMembers/1003"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"id\": 1003,\n    \"fullName\": \"string\",\n    \"email\": \"example@domain.com\",\n    \"phone\": \"string\",\n    \"address\": \"string\",\n    \"membershipStartDate\": \"2026-06-27T02:27:26.6660841+00:00\",\n    \"membershipEndDate\": null,\n    \"status\": 0\n}"
+                }
+              ]
+            },
+            {
+              "name": "Get By ID",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/LibraryMembers/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "LibraryMembers",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "5501"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "text/plain"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/LibraryMembers/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "LibraryMembers",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id",
+                          "value": "3"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": ":status",
+                      "value": 200
+                    },
+                    {
+                      "key": "content-type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "date",
+                      "value": "Sat, 27 Jun 2026 02:28:04 GMT"
+                    },
+                    {
+                      "key": "server",
+                      "value": "Kestrel"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"id\": 3,\n    \"fullName\": \"Ahmed Ali\",\n    \"email\": \"ahmed@test.com\",\n    \"phone\": \"0100000000\",\n    \"address\": \"Cairo\",\n    \"membershipStartDate\": \"2026-06-27T01:12:08.6866667+00:00\",\n    \"membershipEndDate\": null,\n    \"status\": 0\n}"
+                }
+              ]
+            },
+            {
+              "name": "Update By ID",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"fullName\": \"string\",\n  \"phone\": \"string\",\n  \"address\": \"string\",\n  \"membershipEndDate\": \"1999-12-25T07:47:17.796Z\",\n  \"status\": 1\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/LibraryMembers/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "LibraryMembers",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "5501"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"fullName\": \"string\",\n  \"phone\": \"string\",\n  \"address\": \"string\",\n  \"membershipEndDate\": \"1999-12-25T07:47:17.796Z\",\n  \"status\": 1\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/LibraryMembers/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "LibraryMembers",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id",
+                          "value": "3"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "name": "Delete By ID",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/LibraryMembers/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "LibraryMembers",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "5501"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/LibraryMembers/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "LibraryMembers",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id",
+                          "value": "3"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Publishers",
+          "item": [
+            {
+              "name": "Get All Pagintaed",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/Publishers?pageNumber=1&pageSize=10",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Publishers"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "10"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "text/plain"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/Publishers?pageNumber=1&pageSize=10",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "Publishers"
+                      ],
+                      "query": [
+                        {
+                          "key": "pageNumber",
+                          "value": "1"
+                        },
+                        {
+                          "key": "pageSize",
+                          "value": "10"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": ":status",
+                      "value": 200
+                    },
+                    {
+                      "key": "content-type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "date",
+                      "value": "Sat, 27 Jun 2026 02:48:13 GMT"
+                    },
+                    {
+                      "key": "server",
+                      "value": "Kestrel"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"items\": [\n        {\n            \"id\": 1,\n            \"name\": \"OReilly\",\n            \"country\": \"USA\",\n            \"email\": \"contact@oreilly.com\",\n            \"phone\": \"123456\"\n        },\n        {\n            \"id\": 2,\n            \"name\": \"New\",\n            \"country\": \"string\",\n            \"email\": \"string\",\n            \"phone\": \"string\"\n        },\n        {\n            \"id\": 3,\n            \"name\": \"No Starch Press\",\n            \"country\": \"USA\",\n            \"email\": \"hello@nostarch.com\",\n            \"phone\": \"555666\"\n        },\n        {\n            \"id\": 1002,\n            \"name\": \"string\",\n            \"country\": \"string\",\n            \"email\": \"string\",\n            \"phone\": \"string\"\n        }\n    ],\n    \"totalCount\": 4,\n    \"pageNumber\": 1,\n    \"pageSize\": 10\n}"
+                }
+              ]
+            },
+            {
+              "name": "Create",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"string\",\n  \"country\": \"string\",\n  \"email\": \"string\",\n  \"phone\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/Publishers",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Publishers"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "text/plain"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"string\",\n  \"country\": \"string\",\n  \"email\": \"string\",\n  \"phone\": \"string\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/Publishers",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "Publishers"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": ":status",
+                      "value": 201
+                    },
+                    {
+                      "key": "content-type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "date",
+                      "value": "Sat, 27 Jun 2026 02:25:27 GMT"
+                    },
+                    {
+                      "key": "server",
+                      "value": "Kestrel"
+                    },
+                    {
+                      "key": "location",
+                      "value": "https://localhost:7222/api/Publishers/1002"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"id\": 1002,\n    \"name\": \"string\",\n    \"country\": \"string\",\n    \"email\": \"string\",\n    \"phone\": \"string\"\n}"
+                }
+              ]
+            },
+            {
+              "name": "Get By ID",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "text/plain"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/Publishers/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Publishers",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "5501"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "text/plain"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/Publishers/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "Publishers",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id",
+                          "value": "1"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": ":status",
+                      "value": 200
+                    },
+                    {
+                      "key": "content-type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "date",
+                      "value": "Sat, 27 Jun 2026 02:25:13 GMT"
+                    },
+                    {
+                      "key": "server",
+                      "value": "Kestrel"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"id\": 1,\n    \"name\": \"OReilly\",\n    \"country\": \"USA\",\n    \"email\": \"contact@oreilly.com\",\n    \"phone\": \"123456\"\n}"
+                }
+              ]
+            },
+            {
+              "name": "Update By ID",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"string\",\n  \"country\": \"string\",\n  \"email\": \"string\",\n  \"phone\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/Publishers/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Publishers",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "5501"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"string\",\n  \"country\": \"string\",\n  \"email\": \"string\",\n  \"phone\": \"string\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/Publishers/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "Publishers",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id",
+                          "value": "2"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "name": "Delete By ID",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/Publishers/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Publishers",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "5501"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/Publishers/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "Publishers",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id",
+                          "value": "2"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Users",
+          "item": [
+            {
+              "name": "Get All Paginated",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/Users/paginated?pageNumber=1&pageSize=10\n",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Users",
+                    "paginated"
+                  ],
+                  "query": [
+                    {
+                      "key": "pageNumber",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "10\n"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Ok",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/Users/paginated?pageNumber=1&pageSize=10\n",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "Users",
+                        "paginated"
+                      ],
+                      "query": [
+                        {
+                          "key": "pageNumber",
+                          "value": "1"
+                        },
+                        {
+                          "key": "pageSize",
+                          "value": "10\n"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "Text",
+                  "header": [
+                    {
+                      "key": ":status",
+                      "value": 200
+                    },
+                    {
+                      "key": "content-type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "date",
+                      "value": "Sat, 27 Jun 2026 02:18:22 GMT"
+                    },
+                    {
+                      "key": "server",
+                      "value": "Kestrel"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"items\": [\n        {\n            \"id\": 1,\n            \"userName\": \"admin\",\n            \"email\": \"admin@library.com\",\n            \"role\": \"Admin\"\n        }\n    ],\n    \"totalCount\": 1,\n    \"pageNumber\": 1,\n    \"pageSize\": 10\n}"
+                }
+              ]
+            },
+            {
+              "name": "Get All",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/Users",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Users"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/Users",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "Users"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": ":status",
+                      "value": 200
+                    },
+                    {
+                      "key": "content-type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "date",
+                      "value": "Sat, 27 Jun 2026 02:19:05 GMT"
+                    },
+                    {
+                      "key": "server",
+                      "value": "Kestrel"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "[\n    {\n        \"id\": 1,\n        \"userName\": \"admin\",\n        \"email\": \"admin@library.com\",\n        \"role\": \"Admin\"\n    }\n]"
+                }
+              ]
+            },
+            {
+              "name": "Create",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"BIU@deQjTAFoifT.crci\",\n  \"password\": \"string\",\n  \"roleId\": 5107,\n  \"userName\": \"string\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/Users",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Users"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"email\": \"BIU@deQjTAFoifT.crci\",\n  \"password\": \"String@123456\",\n  \"roleId\": 2,\n  \"userName\": \"string\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/Users",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "Users"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": ":status",
+                      "value": 201
+                    },
+                    {
+                      "key": "content-type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "date",
+                      "value": "Sat, 27 Jun 2026 02:22:10 GMT"
+                    },
+                    {
+                      "key": "server",
+                      "value": "Kestrel"
+                    },
+                    {
+                      "key": "location",
+                      "value": "https://localhost:7222/api/Users/2"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"id\": 2,\n    \"userName\": \"string\",\n    \"email\": \"BIU@deQjTAFoifT.crci\",\n    \"role\": \"Librarian\"\n}"
+                }
+              ]
+            },
+            {
+              "name": "Get By ID",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/Users/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Users",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "5501"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/Users/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "Users",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id",
+                          "value": "1"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": ":status",
+                      "value": 200
+                    },
+                    {
+                      "key": "content-type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "date",
+                      "value": "Sat, 27 Jun 2026 02:22:43 GMT"
+                    },
+                    {
+                      "key": "server",
+                      "value": "Kestrel"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"id\": 1,\n    \"userName\": \"admin\",\n    \"email\": \"admin@library.com\",\n    \"role\": \"Admin\"\n}"
+                }
+              ]
+            },
+            {
+              "name": "Update By ID",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"userName\": \"string\",\n  \"email\": \"a32@MHfKYaRPmoHZfJhGkgSGSeJxacpNEsQb.gl\",\n  \"roleId\": 8429\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/api/Users/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Users",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "5501"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"userName\": \"string\",\n  \"email\": \"a32@MHfKYaRPmoHZfJhGkgSGSeJxacpNEsQb.gl\",\n  \"roleId\": 8429\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/Users/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "Users",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id",
+                          "value": "5501"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "body": ""
+                }
+              ]
+            },
+            {
+              "name": "Delete By ID",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/Users/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "Users",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": "5501"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "OK",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/Users/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "Users",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id",
+                          "value": "2"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "body": ""
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/"
+    },
+    {
+      "key": "token",
+      "secret": true
+    },
+    {
+      "key": "a9f3063d-f4b5-4696-8bb9-e3f1045d88bc",
+      "value": ""
+    }
+  ]
+}

@@ -13,7 +13,7 @@ namespace CODE81_Assessment.Infrastructure.Repositories
         public async Task<Book?> GetByIdAsync(int id, bool isTracking = false)
         {
             IQueryable<Book> query = _context.Books;
-            
+
             if (!isTracking)
                 query = query.AsNoTracking();
 
@@ -54,7 +54,7 @@ namespace CODE81_Assessment.Infrastructure.Repositories
             => _context.Books.Update(entity);
 
         public void Delete(Book entity)
-            => _context.Books.Remove(entity);
+            => entity.DeletedAt = DateTimeOffset.UtcNow;
 
         #endregion
 

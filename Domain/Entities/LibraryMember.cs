@@ -1,9 +1,10 @@
-﻿using CODE81_Assessment.Domain.Enums;
+﻿using CODE81_Assessment.Domain.Common;
+using CODE81_Assessment.Domain.Enums;
 using System.ComponentModel.DataAnnotations;
 
 namespace CODE81_Assessment.Domain.Entities
 {
-    public class LibraryMember
+    public class LibraryMember : BaseEntity
     {
         [Key]
         public int Id { get; set; }

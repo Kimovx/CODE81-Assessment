@@ -11,9 +11,9 @@ namespace CODE81_Assessment.Domain.Entities
         public DateTimeOffset LoginTime { get; set; } = DateTimeOffset.UtcNow;
 
         public bool IsSuccess { get; set; }
-        
+
         public string? IpAddress { get; set; }
-        
+
         public string? UserAgent { get; set; }
 
         public string Action { get; set; } = "Login";

@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using CODE81_Assessment.Domain.Common;
+using System.ComponentModel.DataAnnotations;
 
 namespace CODE81_Assessment.Domain.Entities
 {
-    public class Author
+    public class Author : BaseEntity
     {
         [Key]
         public int Id { get; set; }

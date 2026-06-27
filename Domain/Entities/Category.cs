@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using CODE81_Assessment.Domain.Common;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CODE81_Assessment.Domain.Entities
 {
-    public class Category
+    public class Category : BaseEntity
     {
         [Key]
         public int Id { get; set; }

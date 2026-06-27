@@ -61,6 +61,9 @@ namespace CODE81_Assessment.Application.Services
             await _bookRepository.AddAsync(entity);
             await _unitOfWork.SaveChangesAsync();
 
+            entity = await _bookRepository.GetByIdAsync(entity.Id)
+                ?? throw new EntityNotFoundException("Book not found after creation");
+
             return MapToDto(entity);
         }
 
