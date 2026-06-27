@@ -22,6 +22,16 @@
 - [Features](#features)
 - [Database Schema](#database-schema)
 - [API Reference](#api-reference)
+  - [Auth](#auth----post-apiauth)
+  - [Books](#books----apibooks)
+  - [Authors](#authors----apiauthors)
+  - [Categories](#categories----apicategories)
+  - [Publishers](#publishers----apipublishers)
+  - [Library Members](#library-members----apilibrarymembers)
+  - [Borrowing](#borrowing----apiborrowing)
+  - [System Users](#system-users----apiusers-admin-only)
+  - [Dashboard](#dashboard----apidashboard-admin--librarian)
+  - [Error responses](#error-response-shape)
 - [Authentication & Authorization](#authentication--authorization)
 - [Security Design](#security-design)
 - [Getting Started](#getting-started)
@@ -29,7 +39,6 @@
 - [Project Structure](#project-structure)
 - [Design Decisions](#design-decisions)
 - [Documentation](#documentation)
-- [Known Limitations](#known-limitations)
 
 ---
 
@@ -48,7 +57,7 @@ The project follows **Clean Architecture** with four distinct layers that enforc
 ```
 ┌─────────────────────────────────────────────────────┐
 │                  Presentation Layer                  │
-│         Controllers · Middlewares · Filters          │
+│              Controllers · Middlewares               │
 ├─────────────────────────────────────────────────────┤
 │                  Application Layer                   │
 │    Services · DTOs · Interfaces · Exceptions         │
@@ -99,6 +108,7 @@ The project follows **Clean Architecture** with four distinct layers that enforc
 - **Library Members** — Borrower records with membership lifecycle status (`Active`, `Suspended`, `Expired`)
 - **Borrowing Transactions** — Full borrow and return workflow; records which staff member issued and which processed the return
 - **System Users** — Staff accounts with role assignment, managed separately from library members
+- **Dashboard** — KPIs, trends, top lists, overdue alerts, and inventory insights for Admin and Librarian roles
 
 ### Auth & Security
 
@@ -345,6 +355,161 @@ All endpoints require a `Bearer` token in the `Authorization` header unless note
 
 ---
 
+### Dashboard — `/api/dashboard` *(Admin & Librarian)*
+
+A set of read-only analytical endpoints that power management dashboards. All endpoints require the `Admin` or `Librarian` role.
+
+| Method | Endpoint | Description |
+|---|---|---|
+| `GET` | `/api/dashboard/kpis` | All high-level KPI counts in a single call |
+| `GET` | `/api/dashboard/monthly-activity` | Month-by-month borrow / return / overdue counts |
+| `GET` | `/api/dashboard/top-books` | Most-borrowed books ranked by borrow count |
+| `GET` | `/api/dashboard/top-members` | Most-active members ranked by borrow count |
+| `GET` | `/api/dashboard/overdue` | All currently overdue transactions, ordered by days overdue |
+| `GET` | `/api/dashboard/books-by-category` | Book count per category, ordered by count |
+| `GET` | `/api/dashboard/inventory` | Availability rate and borrow rate as percentages |
+| `GET` | `/api/dashboard/recent-transactions` | Most recent borrowing transactions |
+
+#### KPIs — `GET /api/dashboard/kpis`
+
+No query parameters. Returns a single object with counts across all entities.
+
+```json
+{
+  "totalBooks": 120,
+  "availableBooks": 95,
+  "borrowedBooks": 25,
+  "totalMembers": 340,
+  "activeMembers": 310,
+  "suspendedMembers": 20,
+  "expiredMembers": 10,
+  "totalTransactions": 870,
+  "activeTransactions": 25,
+  "returnedTransactions": 830,
+  "overdueTransactions": 12,
+  "lostTransactions": 3,
+  "totalAuthors": 48,
+  "totalCategories": 15,
+  "totalPublishers": 9
+}
+```
+
+#### Monthly activity — `GET /api/dashboard/monthly-activity`
+
+| Query param | Type | Default | Max |
+|---|---|---|---|
+| `months` | int | `12` | `36` |
+
+```json
+[
+  { "month": "2026-01", "borrowCount": 42, "returnCount": 38, "overdueCount": 4 },
+  { "month": "2026-02", "borrowCount": 55, "returnCount": 50, "overdueCount": 5 }
+]
+```
+
+#### Top borrowed books — `GET /api/dashboard/top-books`
+
+| Query param | Type | Default | Max |
+|---|---|---|---|
+| `top` | int | `10` | `50` |
+
+```json
+[
+  {
+    "bookId": 1,
+    "title": "Clean Code",
+    "isbn": "9780132350884",
+    "borrowCount": 34,
+    "authors": ["Robert C. Martin"]
+  }
+]
+```
+
+#### Top active members — `GET /api/dashboard/top-members`
+
+| Query param | Type | Default | Max |
+|---|---|---|---|
+| `top` | int | `10` | `50` |
+
+```json
+[
+  {
+    "memberId": 3,
+    "fullName": "Ahmed Ali",
+    "email": "ahmed@test.com",
+    "borrowCount": 18
+  }
+]
+```
+
+#### Overdue transactions — `GET /api/dashboard/overdue`
+
+No query parameters. Returns all active transactions past their due date.
+
+```json
+[
+  {
+    "transactionId": 7,
+    "bookId": 3,
+    "bookTitle": "Domain-Driven Design",
+    "memberId": 3,
+    "memberName": "Ahmed Ali",
+    "memberEmail": "ahmed@test.com",
+    "borrowDate": "2026-05-01T00:00:00Z",
+    "dueDate": "2026-05-15T00:00:00",
+    "daysOverdue": 43
+  }
+]
+```
+
+#### Books by category — `GET /api/dashboard/books-by-category`
+
+No query parameters.
+
+```json
+[
+  { "categoryId": 1, "categoryName": "Programming",        "bookCount": 45 },
+  { "categoryId": 3, "categoryName": "Software Engineering","bookCount": 30 }
+]
+```
+
+#### Inventory status — `GET /api/dashboard/inventory`
+
+No query parameters.
+
+```json
+{
+  "totalBooks": 120,
+  "availableBooks": 95,
+  "borrowedBooks": 25,
+  "availabilityRate": 79.17,
+  "borrowRate": 20.83
+}
+```
+
+#### Recent transactions — `GET /api/dashboard/recent-transactions`
+
+| Query param | Type | Default | Max |
+|---|---|---|---|
+| `top` | int | `10` | `100` |
+
+```json
+[
+  {
+    "transactionId": 42,
+    "bookTitle": "Clean Code",
+    "memberName": "Ahmed Ali",
+    "status": "Active",
+    "borrowDate": "2026-06-20T10:00:00Z",
+    "dueDate": "2026-07-04T10:00:00",
+    "returnDate": null,
+    "createdBy": "admin"
+  }
+]
+```
+
+---
+
 ### Error response shape
 
 ```json
@@ -387,6 +552,7 @@ All endpoints require a `Bearer` token in the `Authorization` header unless note
 | Process a return | ✅ | ✅ | ✅ |
 | View borrowing transaction history | ✅ | ✅ | ❌ |
 | Manage system users | ✅ | ❌ | ❌ |
+| View dashboard & analytics | ✅ | ✅ | ❌ |
 
 ---
 
@@ -501,18 +667,20 @@ CODE81 Assessment/
 │
 ├── Application/
 │   ├── Common/             # PaginatedResult<T>
-│   ├── DTOs/               # Per-entity Create/Update/Response DTOs
+│   ├── DTOs/
+│   │   ├── ...             # Per-entity Create/Update/Response DTOs
+│   │   └── Dashboard/      # DashboardDto.cs — all dashboard response types
 │   ├── Exceptions/         # Typed HTTP exceptions (404, 409, 401, 400, 500)
 │   ├── Interfaces/
-│   │   ├── Repositories/   # IBookRepository, IAuthorRepository, etc.
-│   │   └── Services/       # IBookService, IAuthService, IJwtService, etc.
-│   └── Services/           # Business logic implementations
+│   │   ├── Repositories/   # IBookRepository, IAuthorRepository, IDashboardRepository, etc.
+│   │   └── Services/       # IBookService, IAuthService, IDashboardService, etc.
+│   └── Services/           # Business logic implementations (incl. DashboardService)
 │
 ├── Infrastructure/
 │   ├── AppDbContext.cs     # EF Core DbContext + Fluent API configuration
 │   ├── DbSeeder.cs         # Seeds roles and default admin user on startup
-│   ├── DependencyInjection.cs  # Service and repository registration
-│   ├── Repositories/       # EF Core repository implementations
+│   ├── DependencyInjection.cs  # Service and repository registration (incl. Dashboard)
+│   ├── Repositories/       # EF Core repository implementations (incl. DashboardRepository)
 │   ├── Services/
 │   │   ├── JwtService.cs         # Token generation (access + refresh)
 │   │   └── FileStorageService.cs # Cover image upload to wwwroot/books/
@@ -520,7 +688,7 @@ CODE81 Assessment/
 │
 ├── Presentaion/
 │   ├── Controllers/        # Auth, Books, Authors, Categories, Publishers,
-│   │                       # LibraryMembers, Borrowing, Users
+│   │                       # LibraryMembers, Borrowing, Users, Dashboard
 │   └── Middlewares/
 │       ├── GlobalExceptionMiddleware.cs   # Centralised error → JSON response
 │       └── UserActivityMiddleware.cs      # Per-request activity logging
@@ -567,6 +735,10 @@ The refresh token is sent as an `HttpOnly; Secure; SameSite=None` cookie instead
 
 Cover images are saved to `wwwroot/books/` with a GUID filename to avoid collisions. The relative URL (e.g. `/books/<guid>.jpg`) is stored on the `Book` entity and served as a static file. For production, this should be replaced with Azure Blob Storage or S3.
 
+### Dashboard design — read-only, no caching
+
+All dashboard queries run directly against the database using `AsNoTracking()` for performance. Each endpoint is a focused query (no heavy joins across unrelated tables) so response times stay acceptable at moderate data volumes. For high-traffic production use, a caching layer (e.g. Redis with a short TTL) should be added in front of the dashboard repository.
+
 ---
 
 ## Documentation
@@ -577,14 +749,11 @@ All supporting documentation lives in the `Docs/` folder:
 |---|---|
 | [`Docs/ERD.png`](Docs/ERD.png) | Full Entity Relationship Diagram showing all tables, columns, and FK relationships |
 | [`Docs/SQL_Script__Schema___Data_.sql`](Docs/SQL_Script__Schema___Data_.sql) | Complete schema creation script + sample data for all tables |
-| [`Docs/CODE81_Assessment_postman_collection.json`](Docs/CODE81_Assessment_postman_collection.json) | Postman collection with 30 requests across all 8 resource groups, ready to import |
+| [`Docs/CODE81_Assessment_postman_collection.json`](Docs/CODE81_Assessment_postman_collection.json) | Postman collection with requests across all resource groups, ready to import |
 
 ### Importing the Postman collection
 
 1. Open Postman → **Import**
 2. Select `Docs/CODE81_Assessment_postman_collection.json`
-3. Set the `baseUrl` environment variable to `https://localhost:7222`
-4. Run **Login** first to get your access token, then use it in the `Authorization` header for subsequent requests
-
----
-
+3. Update the `baseUrl` collection variable to match your local port (default: `https://localhost:7222`)
+4. Run **Login** — the collection automatically saves the returned `accessToken` to a collection variable and attaches it as a `Bearer` token on all subsequent requests. No manual copy-paste needed.

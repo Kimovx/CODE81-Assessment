@@ -58,6 +58,12 @@ namespace CODE81_Assessment.Infrastructure
             #region Users
             services.AddScoped<IUserService, UserService>();
             #endregion
+
+            #region Dashboard
+            services.AddScoped<IDashboardRepository, DashboardRepository>();
+            services.AddScoped<IDashboardService, DashboardService>();
+            #endregion
+
             return services;
         }
     }

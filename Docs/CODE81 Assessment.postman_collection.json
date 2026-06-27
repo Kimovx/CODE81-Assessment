@@ -3365,6 +3365,335 @@
               ]
             }
           ]
+        },
+        {
+          "name": "Dashborad",
+          "item": [
+            {
+              "name": "Get KPIs",
+              "request": {
+                "method": "GET",
+                "header": []
+              },
+              "response": [
+                {
+                  "name": "Ok",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/Dashboard/kpis",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "Dashboard",
+                        "kpis"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": ":status",
+                      "value": 200
+                    },
+                    {
+                      "key": "content-type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "date",
+                      "value": "Sat, 27 Jun 2026 20:25:22 GMT"
+                    },
+                    {
+                      "key": "server",
+                      "value": "Kestrel"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n    \"totalBooks\": 10,\n    \"availableBooks\": 8,\n    \"borrowedBooks\": 2,\n    \"totalMembers\": 4,\n    \"activeMembers\": 4,\n    \"suspendedMembers\": 0,\n    \"expiredMembers\": 0,\n    \"totalTransactions\": 3,\n    \"activeTransactions\": 1,\n    \"returnedTransactions\": 2,\n    \"overdueTransactions\": 0,\n    \"lostTransactions\": 0,\n    \"totalAuthors\": 6,\n    \"totalCategories\": 7,\n    \"totalPublishers\": 4\n}"
+                }
+              ]
+            },
+            {
+              "name": "Get Monthly Activity",
+              "request": {
+                "method": "GET",
+                "header": []
+              },
+              "response": [
+                {
+                  "name": "Ok",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/Dashboard/monthly-activity?months=12",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "Dashboard",
+                        "monthly-activity"
+                      ],
+                      "query": [
+                        {
+                          "key": "months",
+                          "value": "12"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": ":status",
+                      "value": 200
+                    },
+                    {
+                      "key": "content-type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "date",
+                      "value": "Sat, 27 Jun 2026 20:31:19 GMT"
+                    },
+                    {
+                      "key": "server",
+                      "value": "Kestrel"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "[\n    {\n        \"month\": \"2025-07\",\n        \"borrowCount\": 0,\n        \"returnCount\": 0,\n        \"overdueCount\": 0\n    },\n    {\n        \"month\": \"2025-08\",\n        \"borrowCount\": 0,\n        \"returnCount\": 0,\n        \"overdueCount\": 0\n    },\n    {\n        \"month\": \"2025-09\",\n        \"borrowCount\": 0,\n        \"returnCount\": 0,\n        \"overdueCount\": 0\n    },\n    {\n        \"month\": \"2025-10\",\n        \"borrowCount\": 0,\n        \"returnCount\": 0,\n        \"overdueCount\": 0\n    },\n    {\n        \"month\": \"2025-11\",\n        \"borrowCount\": 0,\n        \"returnCount\": 0,\n        \"overdueCount\": 0\n    },\n    {\n        \"month\": \"2025-12\",\n        \"borrowCount\": 0,\n        \"returnCount\": 0,\n        \"overdueCount\": 0\n    },\n    {\n        \"month\": \"2026-01\",\n        \"borrowCount\": 0,\n        \"returnCount\": 0,\n        \"overdueCount\": 0\n    },\n    {\n        \"month\": \"2026-02\",\n        \"borrowCount\": 0,\n        \"returnCount\": 0,\n        \"overdueCount\": 0\n    },\n    {\n        \"month\": \"2026-03\",\n        \"borrowCount\": 0,\n        \"returnCount\": 0,\n        \"overdueCount\": 0\n    },\n    {\n        \"month\": \"2026-04\",\n        \"borrowCount\": 0,\n        \"returnCount\": 0,\n        \"overdueCount\": 0\n    },\n    {\n        \"month\": \"2026-05\",\n        \"borrowCount\": 0,\n        \"returnCount\": 0,\n        \"overdueCount\": 0\n    },\n    {\n        \"month\": \"2026-06\",\n        \"borrowCount\": 3,\n        \"returnCount\": 2,\n        \"overdueCount\": 0\n    }\n]"
+                }
+              ]
+            },
+            {
+              "name": "Get Top Books",
+              "request": {
+                "method": "GET",
+                "header": []
+              },
+              "response": [
+                {
+                  "name": "Ok",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/Dashboard/top-books?top=10",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "Dashboard",
+                        "top-books"
+                      ],
+                      "query": [
+                        {
+                          "key": "top",
+                          "value": "10"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": ":status",
+                      "value": 200
+                    },
+                    {
+                      "key": "content-type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "date",
+                      "value": "Sat, 27 Jun 2026 20:30:48 GMT"
+                    },
+                    {
+                      "key": "server",
+                      "value": "Kestrel"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "[\n    {\n        \"bookId\": 1,\n        \"title\": \"Clean Code\",\n        \"isbn\": \"1111111111111\",\n        \"borrowCount\": 1,\n        \"authors\": [\n            \"Robert C. Martin\"\n        ]\n    },\n    {\n        \"bookId\": 2,\n        \"title\": \"Refactoring\",\n        \"isbn\": \"2222222222222\",\n        \"borrowCount\": 1,\n        \"authors\": [\n            \"Martin Fowler\"\n        ]\n    },\n    {\n        \"bookId\": 5,\n        \"title\": \"The Pragmatic Programmer\",\n        \"isbn\": \"5555555555555\",\n        \"borrowCount\": 1,\n        \"authors\": []\n    }\n]"
+                }
+              ]
+            },
+            {
+              "name": "Get Top Members",
+              "request": {
+                "method": "GET",
+                "header": []
+              },
+              "response": [
+                {
+                  "name": "Ok",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/Dashboard/top-members?top=10",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "Dashboard",
+                        "top-members"
+                      ],
+                      "query": [
+                        {
+                          "key": "top",
+                          "value": "10"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": ":status",
+                      "value": 200
+                    },
+                    {
+                      "key": "content-type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "date",
+                      "value": "Sat, 27 Jun 2026 20:28:04 GMT"
+                    },
+                    {
+                      "key": "server",
+                      "value": "Kestrel"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "[\n    {\n        \"memberId\": 3,\n        \"fullName\": \"Ahmed Ali\",\n        \"email\": \"ahmed@test.com\",\n        \"borrowCount\": 2\n    },\n    {\n        \"memberId\": 4,\n        \"fullName\": \"Sara Mohamed\",\n        \"email\": \"sara@test.com\",\n        \"borrowCount\": 1\n    }\n]"
+                }
+              ]
+            },
+            {
+              "name": "Get Overdue Borrows",
+              "request": {
+                "method": "GET",
+                "header": []
+              },
+              "response": [
+                {
+                  "name": "Ok",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/Dashboard/overdue",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "Dashboard",
+                        "overdue"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": ":status",
+                      "value": 200
+                    },
+                    {
+                      "key": "content-type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "date",
+                      "value": "Sat, 27 Jun 2026 20:28:43 GMT"
+                    },
+                    {
+                      "key": "server",
+                      "value": "Kestrel"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "[]"
+                }
+              ]
+            },
+            {
+              "name": "Recent Transactions",
+              "request": {
+                "method": "GET",
+                "header": []
+              },
+              "response": [
+                {
+                  "name": "Ok",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/Dashboard/recent-transactions?top=10",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "Dashboard",
+                        "recent-transactions"
+                      ],
+                      "query": [
+                        {
+                          "key": "top",
+                          "value": "10"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": ":status",
+                      "value": 200
+                    },
+                    {
+                      "key": "content-type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "date",
+                      "value": "Sat, 27 Jun 2026 20:29:16 GMT"
+                    },
+                    {
+                      "key": "server",
+                      "value": "Kestrel"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "[\n    {\n        \"transactionId\": 3,\n        \"bookTitle\": \"Clean Code\",\n        \"memberName\": \"Ahmed Ali\",\n        \"status\": \"Active\",\n        \"borrowDate\": \"2026-06-27T04:13:30.3066667+00:00\",\n        \"dueDate\": \"2026-07-04T04:13:30.3066667\",\n        \"returnDate\": null,\n        \"createdBy\": \"admin\"\n    },\n    {\n        \"transactionId\": 4,\n        \"bookTitle\": \"Refactoring\",\n        \"memberName\": \"Sara Mohamed\",\n        \"status\": \"Returned\",\n        \"borrowDate\": \"2026-06-27T04:13:30.3066667+00:00\",\n        \"dueDate\": \"2026-07-04T04:13:30.3066667\",\n        \"returnDate\": \"2026-06-27T04:13:30.3066667+00:00\",\n        \"createdBy\": \"admin\"\n    },\n    {\n        \"transactionId\": 1002,\n        \"bookTitle\": \"The Pragmatic Programmer\",\n        \"memberName\": \"Ahmed Ali\",\n        \"status\": \"Returned\",\n        \"borrowDate\": \"2026-06-27T02:45:12.986171+00:00\",\n        \"dueDate\": \"1972-09-06T13:06:15.532\",\n        \"returnDate\": \"2026-06-27T02:45:41.9540197+00:00\",\n        \"createdBy\": \"admin\"\n    }\n]"
+                }
+              ]
+            }
+          ]
         }
       ]
     }
