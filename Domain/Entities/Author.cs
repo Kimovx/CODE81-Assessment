@@ -5,7 +5,7 @@ namespace CODE81_Assessment.Domain.Entities
     public class Author
     {
         [Key]
-        public required int Id { get; set; }
+        public int Id { get; set; }
 
         [Required, MaxLength(255)]
         public required string Name { get; set; }

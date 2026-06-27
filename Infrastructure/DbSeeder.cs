@@ -8,7 +8,7 @@ namespace CODE81_Assessment.Infrastructure
         public static async Task SeedAsync(UserManager<AppUser> userManager, RoleManager<AppRole> roleManager)
         {
             // Seed Roles
-            string[] roles = ["Admin", "Librarian", "Staff", "Member"];
+            string[] roles = ["Admin", "Librarian", "Staff"];
             foreach (var role in roles)
             {
                 if (!await roleManager.RoleExistsAsync(role))

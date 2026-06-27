@@ -35,6 +35,9 @@ namespace CODE81_Assessment.Domain.Entities
         [Required, ForeignKey("PublisherId")]
         public required int PublisherId { get; set; }
 
+        [Timestamp]
+        public byte[] RowVersion { get; set; } = null!;
+
         // Navigations
         public Publisher Publisher { get; set; } = null!;
         public ICollection<Author> Authors { get; set; } = [];

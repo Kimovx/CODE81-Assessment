@@ -21,7 +21,44 @@ namespace CODE81_Assessment.Infrastructure
             services.AddScoped<IAuthService, AuthService>();
             #endregion
 
+            #region Books
+            services.AddScoped<IBookRepository, BookRepository>();
+            services.AddScoped<IBookService, BookService>();
+            #endregion
+
+            #region Authors
+            services.AddScoped<IAuthorRepository, AuthorRepository>();
+            services.AddScoped<IAuthorService, AuthorService>();
+            #endregion
+
+            #region Categories
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<ICategoryService, CategoryService>();
+            #endregion
+
+            #region File Storage
+            services.AddScoped<IFileStorageService, FileStorageService>();
+            #endregion
+
+            #region Publishers
+            services.AddScoped<IPublisherRepository, PublisherRepository>();
+            services.AddScoped<IPublisherService, PublisherService>();
+            #endregion
+
+            #region Library Members
+            services.AddScoped<ILibraryMemberRepository, LibraryMemberRepository>();
+            services.AddScoped<ILibraryMemberService, LibraryMemberService>();
+            #endregion
+
+            #region Borrowing Transaction
+            services.AddScoped<IBorrowingRepository, BorrowingRepository>();
+            services.AddScoped<IBorrowingService, BorrowingService>();
+            #endregion
+
+            #region Users
+            services.AddScoped<IUserService, UserService>();
+            #endregion
             return services;
         }
-}
+    }
 }

@@ -53,6 +53,9 @@ namespace CODE81_Assessment.Infrastructure
                 .HasForeignKey(bt => bt.ReturnedById);
             #endregion
 
+            #region Update App User Default Constrains
+            builder.Entity<AppUser>().Property(u => u.UserName).IsRequired();
+            #endregion
         }
         #endregion
 
@@ -61,7 +64,10 @@ namespace CODE81_Assessment.Infrastructure
         public DbSet<Book> Books => Set<Book>();
         public DbSet<Category> Categories => Set<Category>();
         public DbSet<Publisher> Publishers => Set<Publisher>();
+        public DbSet<LibraryMember> LibraryMembers => Set<LibraryMember>();
         public DbSet<RefreshToken> RefreshTokens => Set<RefreshToken>();
+        public DbSet<UserLoginLog> UserLoginLogs => Set<UserLoginLog>();
+        public DbSet<BorrowingTransaction> BorrowingTransactions => Set<BorrowingTransaction>();
         #endregion
     }
 }

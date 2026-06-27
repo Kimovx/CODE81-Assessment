@@ -22,7 +22,7 @@ namespace CODE81_Assessment.Application.Services
         public async Task<AuthResponseDto> Login(AuthRequestDto request)
         {
             // Check if user exists
-            var user = await _userManager.FindByEmailAsync(request.Email)
+            var user = await _userManager.FindByNameAsync(request.Username)
                 ?? throw new InvalidCredentialsException();
 
             // Validate user password
