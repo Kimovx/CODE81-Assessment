@@ -588,13 +588,3 @@ All supporting documentation lives in the `Docs/` folder:
 
 ---
 
-## Known Limitations
-
-The following items were not fully completed:
-
-- **Search endpoint not implemented** — `GET /api/books/search?Title=&Author=&Category=` is defined in the Postman collection with the correct signature but the controller route, service method, and repository query were not implemented before the deadline
-- **Filter by status not implemented** — `GET /api/books/by-status?Status=` is similarly defined in Postman but not wired up in the API
-- **Login-specific activity logging** — A `CreateUserLoginLog` helper exists in `AuthService` but is not called; login events are captured by the general `UserActivityMiddleware` but not tagged distinctly
-- **Minimal DTO validation** — Data annotations on request DTOs are limited to `[Required]`; no FluentValidation or field-length / format constraints are applied
-- **Test-data noise in SQL export** — Some rows in the SQL script use placeholder values (`"string"`, `"UpdatedString"`) from Swagger testing; these are artefacts of the development/testing process
-
