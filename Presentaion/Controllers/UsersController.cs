@@ -1,5 +1,6 @@
 ﻿using CODE81_Assessment.Application.Common;
 using CODE81_Assessment.Application.DTOs.User;
+using CODE81_Assessment.Application.DTOs.UserLogs;
 using CODE81_Assessment.Application.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -58,6 +59,27 @@ namespace CODE81_Assessment.Presentaion.Controllers
             return NoContent();
         }
 
+        #endregion
+
+        #region Activity Logs
+        [HttpGet("{id}/activity-logs")]
+        public async Task<ActionResult<PaginatedResult<UserLogDto>>> GetUserActivityLogs(
+            int id,
+            [FromQuery] int pageNumber = 1,
+            [FromQuery] int pageSize = 10)
+        {
+            var logs = await _userService.GetUserActivityLogsPaginatedAsync(id, pageNumber, pageSize);
+            return Ok(logs);
+        }
+
+        [HttpGet("activity-logs")]
+        public async Task<ActionResult<PaginatedResult<UserLogDto>>> GetAllActivityLogs(
+            [FromQuery] int pageNumber = 1,
+            [FromQuery] int pageSize = 10)
+        {
+            var logs = await _userService.GetAllLogsPaginatedAsync(pageNumber, pageSize);
+            return Ok(logs);
+        }
         #endregion
     }
 }

@@ -128,7 +128,5 @@ namespace CODE81_Assessment.Infrastructure.Repositories
             return (books, totalCount);
         }
         #endregion
-
-
     }
 }

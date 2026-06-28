@@ -15,9 +15,6 @@ namespace CODE81_Assessment.Presentaion.Controllers
         [HttpPost("")]
         public async Task<IActionResult> Authenticate([FromBody] AuthRequestDto requestDto)
         {
-            if (!ModelState.IsValid)
-                throw new BadRequestException();
-
             var result = await _authService.Login(requestDto);
 
             if (String.IsNullOrEmpty(result.RefreshToken))

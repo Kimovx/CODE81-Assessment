@@ -82,7 +82,7 @@ namespace CODE81_Assessment.Infrastructure
         public DbSet<Publisher> Publishers => Set<Publisher>();
         public DbSet<LibraryMember> LibraryMembers => Set<LibraryMember>();
         public DbSet<RefreshToken> RefreshTokens => Set<RefreshToken>();
-        public DbSet<UserLoginLog> UserLoginLogs => Set<UserLoginLog>();
+        public DbSet<UserActivityLog> UserActivityLogs => Set<UserActivityLog>();
         public DbSet<BorrowingTransaction> BorrowingTransactions => Set<BorrowingTransaction>();
         #endregion
 

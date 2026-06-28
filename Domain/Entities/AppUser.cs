@@ -9,6 +9,6 @@ namespace CODE81_Assessment.Domain.Entities
 
         public ICollection<BorrowingTransaction> ReturnedTransactions { get; set; } = [];
 
-        public ICollection<UserLoginLog> LoginLogs { get; set; } = [];
+        public ICollection<UserActivityLog> LoginLogs { get; set; } = [];
     }
 }

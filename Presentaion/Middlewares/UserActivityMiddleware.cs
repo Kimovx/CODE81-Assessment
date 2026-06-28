@@ -36,17 +36,17 @@ namespace CODE81_Assessment.Presentaion.Middlewares
             {
                 if (!string.IsNullOrEmpty(userId))
                 {
-                    var log = new UserLoginLog
+                    var log = new UserActivityLog
                     {
                         UserId = int.Parse(userId),
                         Action = $"{method} {path}",
                         IsSuccess = statusCode < 400,
                         IpAddress = ip,
                         UserAgent = userAgent,
-                        LoginTime = DateTimeOffset.UtcNow
+                        LogTime = DateTimeOffset.UtcNow
                     };
 
-                    await dbContext.UserLoginLogs.AddAsync(log);
+                    await dbContext.UserActivityLogs.AddAsync(log);
                     await dbContext.SaveChangesAsync();
                 }
             }

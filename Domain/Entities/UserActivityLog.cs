@@ -3,12 +3,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CODE81_Assessment.Domain.Entities
 {
-    public class UserLoginLog
+    public class UserActivityLog
     {
         [Key]
         public int Id { get; set; }
 
-        public DateTimeOffset LoginTime { get; set; } = DateTimeOffset.UtcNow;
+        public DateTimeOffset LogTime { get; set; } = DateTimeOffset.UtcNow;
 
         public bool IsSuccess { get; set; }
 
