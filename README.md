@@ -30,6 +30,7 @@
   - [Library Members](#library-members----apilibrarymembers)
   - [Borrowing](#borrowing----apiborrowing)
   - [System Users](#system-users----apiusers-admin-only)
+  - [Activity Logs](#activity-logs----apiusersactivity-logs)
   - [Dashboard](#dashboard----apidashboard-admin--librarian)
   - [Error responses](#error-response-shape)
 - [Authentication & Authorization](#authentication--authorization)
@@ -46,7 +47,7 @@
 
 A full-featured Library Management System REST API enabling librarians and staff to manage books, members, and borrowing workflows. The system implements role-based access control, JWT authentication with refresh token rotation, and a clean layered architecture following Clean Architecture principles.
 
-Built as part of the **CODE81 Technical Assessment**.
+Built as part of the **CODE81 Technical Assessment**, with production-grade design considerations.
 
 ---
 
@@ -134,7 +135,7 @@ The project follows **Clean Architecture** with four distinct layers that enforc
 
 ```
 AppUser (Identity)
-  ├── UserLoginLogs        (activity log — every authenticated request)
+  ├── UserActivityLogs     (activity log — every authenticated request)
   ├── BorrowingTransactions (as CreatedBy  — staff who issued the book)
   └── BorrowingTransactions (as ReturnedBy — staff who processed the return)
 
@@ -171,7 +172,7 @@ RefreshToken
 | `LibraryMembers` | Borrower/patron records |
 | `BorrowingTransactions` | Borrow history — borrow date, due date, return date, status, issuing staff, returning staff |
 | `RefreshTokens` | Hashed refresh tokens with expiry (`ExpiresAt`) and revocation (`RevokedAt`) timestamps |
-| `UserLoginLogs` | Per-request activity log — action, IP address, user agent, success/failure |
+| `UserActivityLogs` | Per-request activity log — action, IP address, user agent, success/failure |
 
 ### Status enumerations
 
@@ -352,6 +353,66 @@ All endpoints require a `Bearer` token in the `Authorization` header unless note
   "roleId": 2
 }
 ```
+
+---
+
+### Activity Logs — `/api/users/activity-logs`
+
+Provides visibility into **all authenticated user actions** across the system.  
+Logs are automatically recorded via middleware for every request made by authenticated users.
+
+Each log entry includes:
+
+- HTTP method & endpoint
+- Execution result (success / failure)
+- IP address
+- User agent (browser / client)
+- Timestamp (UTC)
+- User identity
+
+---
+
+### Endpoints
+
+| Method | Endpoint | Role | Description |
+|---|---|---|---|
+| `GET` | `/api/users/activity-logs` | Admin only | Get all system activity logs (paginated) |
+| `GET` | `/api/users/{id}/activity-logs` | Admin only | Get activity logs for a specific user |
+
+---
+
+### Query Parameters (Pagination)
+
+| Param | Type | Default |
+|---|---|---|
+| `pageNumber` | int | 1 |
+| `pageSize` | int | 10 |
+
+---
+
+### Example Response
+
+```json
+[
+  {
+    "id": 1,
+    "logTime": "2026-06-28T04:38:19.6638478+00:00",
+    "isSuccess": true,
+    "ipAddress": "::1",
+    "userAgent": "PostmanRuntime/7.54.0",
+    "action": "GET /api/users/paginated",
+    "userId": 1,
+    "userName": "admin"
+  }
+]
+```
+
+### Notes
+
+- Logs are generated automatically using `UserActivityMiddleware`
+- Only authenticated users are tracked
+- Requests are marked as successful if `statusCode < 400`
+- Supports reverse proxy environments via `X-Forwarded-For`
 
 ---
 
@@ -662,7 +723,7 @@ CODE81 Assessment/
 ├── Domain/
 │   ├── Entities/           # AppUser, Book, Author, Category, Publisher,
 │   │                       # LibraryMember, BorrowingTransaction,
-│   │                       # RefreshToken, UserLoginLog, AppRole
+│   │                       # RefreshToken, UserActivityLog, AppRole
 │   └── Enums/              # BookStatus, MemberStatus, TransactionStatus
 │
 ├── Application/
